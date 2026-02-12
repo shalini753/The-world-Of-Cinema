@@ -3,11 +3,6 @@
 A visually structured, multi-page cinema website built using HTML5 and CSS3.
 This project demonstrates fundamental front-end development skills, including page structuring, layout design, navigation, and responsive styling.
 
-🔗 Live Preview
-
-(Add your live site link here if hosted on GitHub Pages or Netlify)
-Example: https://your-username.github.io/The-world-Of-Cinema/
-
 📌 Project Description
 
 The World of Cinema is a static website that presents different aspects of the film industry through dedicated sections.
