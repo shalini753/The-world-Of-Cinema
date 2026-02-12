@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Cinema Films</title>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.0/css/all.css">
+    <style>
+    /* Base */
+    body {
+        margin: 0;
+        font-family: Georgia, serif;
+        background-color: #1c140d;
+        background-image: url("images/film-bg.png");
+        color: #f5e6c8;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Navbar */
+    .navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 60px;
+        background: rgba(36,24,15,0.92);
+        border-bottom: 2px solid #6b4f2d;
+        z-index: 1000;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 5px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        color: #c9a24d;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        padding: 0;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #f5e6c8;
+    }
+
+    .nav-links a:hover {
+        color: #c9a24d;
+    }
+
+    /* Section */
+    .films-section {
+        padding: 70px 20px;
+    }
+
+    .films-title {
+        text-align: center;
+        font-size: 38px;
+        color: #c9a24d;
+        margin-bottom: 60px;
+        text-shadow: 2px 2px 6px #000;
+    }
+    /* Grid */
+    .films-grid {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 40px;
+        justify-items: center;
+    }
+
+
+    .film-card {
+        position: relative;
+        width: 250px;             
+        height: 350px; 
+        border-radius: 18px;
+        overflow: hidden;
+        background: #111;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #4a3518;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .film-card:hover {
+        transform: translateY(-6px);
+        box-shadow:0 0 25px rgba(201,162,77,0.35),inset 0 0 10px rgba(201,162,77,0.15);
+
+    }
+
+
+    .film-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    .film-card:hover img {
+        transform: scale(1.12);
+        filter: grayscale(70%);
+    }
+    .poster-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(18, 12, 7, 0.82);
+        color: #f5e6c8;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        backdrop-filter: blur(1px);
+    }
+
+    .film-card:hover .poster-overlay {
+        opacity: 1;
+    }
+    /* YEAR — top center */
+    .poster-overlay .year {
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        letter-spacing: 3px;
+        color: #24180f;
+        background: linear-gradient(135deg,#e6c77b,#c9a24d,#8b6a2f);
+        padding: 6px 14px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(201,162,77,0.6), inset 0 0 6px rgba(255,255,255,0.3);
+        border: 1px solid #6b4f2d;
+    }
+    .poster-overlay .awards {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #e8d9b4;
+        text-shadow: 1px 1px 2px black;
+    }
+    .awards::-webkit-scrollbar {
+        width: 3px;
+    }
+    .awards::-webkit-scrollbar-thumb {
+        background: #765714;
+        border-radius: 10px;
+    }
+    /* Film Grain */
+    .poster-overlay::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("images/grain.png");
+        opacity: 0.14;
+        animation: grain 7s steps(10) infinite;
+        pointer-events: none;
+    }
+
+    @keyframes grain {
+        0% { transform: translate(0,0); }
+        20% { transform: translate(-4%,3%); }
+        40% { transform: translate(3%,-4%); }
+        60% { transform: translate(-3%,2%); }
+        80% { transform: translate(4%,-2%); }
+        100% { transform: translate(0,0); }
+    }
+    /* Tittle */
+    .film-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.9),
+            rgba(0,0,0,0.3),
+            transparent
+        );
+        text-align: center;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .film-card:hover .film-info {
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+    }
+
+
+    .film-info h2 {
+        font-size: 18px;
+        color: #f3e3c3;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    /* Footer */
+    .footer {
+        margin-top: 80px;
+        padding: 22px 15px;
+        background: linear-gradient(to top, #0f0a05, #24180f);
+        border-top: 2px solid #6b4f2d;
+    }
+
+    .footer-inner {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .footer a {
+        color: #c9a24d;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: #f5e6c8;
+    }
+
+    .footer-center {
+        text-align: center;
+        opacity: 0.8;
+    }
+
+    .footer-right {
+        text-align: right;
+    }
+
+    </style>
+    </head>
+
+    <body>
+
+<!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                Film Noiré <i class="fa-duotone fa-solid fa-clapperboard"
+                style="--fa-primary-color:#765714;--fa-secondary-color:#765714;"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="directors.html">Directors</a></li>
+                <li><a href="films.html">Movies</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- FILMS -->
+    <section class="films-section">
+    <h1 class="films-title">Celebrated Films of World Cinema</h1>
+
+    <div class="films-grid">
+        <!--Gone with the Wind -->
+    <div class="film-card">
+      <img src="pictures/films/gone.png">
+      <div class="poster-overlay">
+        <div class="year">1939</div>
+        <div class="awards">
+          Director: Victor Fleming<br><br>
+          🏆 Academy Award – Best Picture (1940)<br>
+          🏆 Best Director<br>
+          🏆 Supporting Actress, Cinematography
+        </div>
+      </div>
+      <div class="film-info"><h2>Gone with the Wind</h2></div>
+    </div>
+
+    <!--The Godfather -->
+    <div class="film-card">
+      <img src="pictures/landingpagepics/godfather.png">
+      <div class="poster-overlay">
+        <div class="year">1972</div>
+        <div class="awards">
+          Director: Francis Ford Coppola<br><br>
+          🏆 Best Picture (1973)<br>
+          🏆 Best Actor – Marlon Brando<br>
+          🏆 Best Adapted Screenplay
+        </div>
+      </div>
+      <div class="film-info"><h2>The Godfather</h2></div>
+    </div>
+
+    <!--Schindler’s List -->
+    <div class="film-card">
+      <img src="pictures/Steven Spielberg/list.png">
+      <div class="poster-overlay">
+        <div class="year">1993</div>
+        <div class="awards">
+          Director: Steven Spielberg<br><br>
+          🏆 Best Picture (1994)<br>
+          🏆 Best Director<br>
+          🏆 Cinematography, Original Score
+        </div>
+      </div>
+      <div class="film-info"><h2>Schindler’s List</h2></div>
+    </div>
+
+    <!--Lawrence of Arabia -->
+    <div class="film-card">
+      <img src="pictures/films/arabia.png">
+      <div class="poster-overlay">
+        <div class="year">1962</div>
+        <div class="awards">
+          Director: David Lean<br><br>
+          🏆 Best Picture (1963)<br>
+          🏆 Best Director<br>
+          🏆 Cinematography, Score
+        </div>
+      </div>
+      <div class="film-info"><h2>Lawrence of Arabia</h2></div>
+    </div>
+
+    <!--Parasite -->
+    <div class="film-card">
+      <img src="pictures/films/parasite.png">
+      <div class="poster-overlay">
+        <div class="year">2019</div>
+        <div class="awards">
+          Director: Bong Joon-ho<br><br>
+          🏆 Best Picture (2020)<br>
+          🏆 Best Director<br>
+          🏆 Best International Feature
+        </div>
+      </div>
+      <div class="film-info"><h2>Parasite</h2></div>
+    </div>
+
+    <!--Titanic -->
+    <div class="film-card">
+      <img src="pictures/films/titanic.png">
+      <div class="poster-overlay">
+        <div class="year">1997</div>
+        <div class="awards">
+          Director: James Cameron<br><br>
+          🏆 Best Picture (1998)<br>
+          🏆 Best Director<br>
+          🏆 Visual Effects, Sound
+        </div>
+      </div>
+      <div class="film-info"><h2>Titanic</h2></div>
+    </div>
+
+    <!--LOTR: Return of the King -->
+    <div class="film-card">
+      <img src="pictures/films/lotr.png">
+      <div class="poster-overlay">
+        <div class="year">2003</div>
+        <div class="awards">
+          Director: Peter Jackson<br><br>
+          🏆 Best Picture (2004)<br>
+          🏆 Best Director<br>
+          🏆 11/11 Oscar Wins
+        </div>
+      </div>
+      <div class="film-info"><h2>LOTR: Return of the King</h2></div>
+    </div>
+
+    <!--The Sound of Music -->
+    <div class="film-card">
+      <img src="pictures/films/music.png">
+      <div class="poster-overlay">
+        <div class="year">1965</div>
+        <div class="awards">
+          Director: Robert Wise<br><br>
+          🏆 Best Picture (1966)<br>
+          🏆 Best Director<br>
+          🏆 Score, Editing
+        </div>
+      </div>
+      <div class="film-info"><h2>The Sound of Music</h2></div>
+    </div>
+
+    <!--One Flew Over the Cuckoo’s Nest -->
+    <div class="film-card">
+      <img src="pictures/films/cuckoo.png">
+      <div class="poster-overlay">
+        <div class="year">1975</div>
+        <div class="awards">
+          Director: Miloš Forman<br><br>
+          🏆 Big Five Oscars<br>
+          🏆 Best Actor & Actress
+        </div>
+      </div>
+      <div class="film-info"><h2>One Flew Over the Cuckoo’s Nest</h2></div>
+    </div>
+
+    <!--Amadeus -->
+    <div class="film-card">
+      <img src="pictures/films/amadeus.png">
+      <div class="poster-overlay">
+        <div class="year">1984</div>
+        <div class="awards">
+          Director: Miloš Forman<br><br>
+          🏆 Best Picture (1985)<br>
+          🏆 Best Director<br>
+          🏆 Costume Design, Sound
+        </div>
+      </div>
+      <div class="film-info"><h2>Amadeus</h2></div>
+    </div>
+
+    <!--Casablanca -->
+    <div class="film-card">
+      <img src="pictures/films/casablanca.png">
+      <div class="poster-overlay">
+        <div class="year">1942</div>
+        <div class="awards">
+          Director: Michael Curtiz<br><br>
+          🏆 Best Picture (1944)<br>
+          🏆 Best Director<br>
+          🏆 Best Screenplay
+        </div>
+      </div>
+      <div class="film-info"><h2>Casablanca</h2></div>
+    </div>
+
+    <!--12 Years a Slave -->
+    <div class="film-card">
+      <img src="pictures/films/12.png">
+      <div class="poster-overlay">
+        <div class="year">2013</div>
+        <div class="awards">
+          Director: Steve McQueen<br><br>
+          🏆 Best Picture (2014)<br>
+          🏆 Supporting Actress<br>
+          🏆 Golden Globe – Drama
+        </div>
+      </div>
+      <div class="film-info"><h2>12 Years a Slave</h2></div>
+    </div>
+
+    <!--Crouching Tiger, Hidden Dragon -->
+    <div class="film-card">
+      <img src="pictures/films/tiger.png">
+      <div class="poster-overlay">
+        <div class="year">2000</div>
+        <div class="awards">
+          Director: Ang Lee<br><br>
+          🏆 Best Foreign Film<br>
+          🏆 Cinematography, Score
+        </div>
+      </div>
+      <div class="film-info"><h2>Crouching Tiger, Hidden Dragon</h2></div>
+    </div>
+
+    <!--The Pianist -->
+    <div class="film-card">
+      <img src="pictures/films/pianist.png">
+      <div class="poster-overlay">
+        <div class="year">2002</div>
+        <div class="awards">
+          Director: Roman Polanski<br><br>
+          🏆 Best Director<br>
+          🏆 Best Actor<br>
+          🏆 Adapted Screenplay
+        </div>
+      </div>
+      <div class="film-info"><h2>The Pianist</h2></div>
+    </div>
+
+    <!--In the Mood for Love -->
+    <div class="film-card">
+      <img src="pictures/Wong Kar-wai/inthemood.png">
+      <div class="poster-overlay">
+        <div class="year">2000</div>
+        <div class="awards">
+          Director: Wong Kar-wai<br><br>
+          🏆 Best Actor – Cannes<br>
+          🏆 César – Best Foreign Film
+        </div>
+      </div>
+      <div class="film-info"><h2>In the Mood for Love</h2></div>
+    </div>
+
+    <!--Roma -->
+    <div class="film-card">
+      <img src="pictures/films/roma.png">
+      <div class="poster-overlay">
+        <div class="year">2018</div>
+        <div class="awards">
+          Director: Alfonso Cuarón<br><br>
+          🏆 Best Director<br>
+          🏆 Cinematography<br>
+          🏆 Foreign Language Film
+        </div>
+      </div>
+      <div class="film-info"><h2>Roma</h2></div>
+    </div>
+
+    <!--The Godfather Part II -->
+    <div class="film-card">
+      <img src="pictures/films/gdfather.png">
+      <div class="poster-overlay">
+        <div class="year">1974</div>
+        <div class="awards">
+          Director: Francis Ford Coppola<br><br>
+          🏆 Best Picture (1975)<br>
+          🏆 Best Director<br>
+          🏆 Supporting Actor
+        </div>
+      </div>
+      <div class="film-info"><h2>The Godfather Part II</h2></div>
+    </div>
+
+    <!--Amélie -->
+    <div class="film-card">
+      <img src="pictures/films/amelie.png">
+      <div class="poster-overlay">
+        <div class="year">2001</div>
+        <div class="awards">
+          Director: Jean-Pierre Jeunet<br><br>
+          🏆 BAFTA – Best Film<br>
+          🏆 César Awards
+        </div>
+      </div>
+      <div class="film-info"><h2>Amélie</h2></div>
+    </div>
+
+    <!--City of God -->
+    <div class="film-card">
+      <img src="pictures/films/city.png">
+      <div class="poster-overlay">
+        <div class="year">2002</div>
+        <div class="awards">
+          Directors: Meirelles & Lund<br><br>
+          🏆 BAFTA – Best Non-English Film<br>
+          🏆 Oscar Nominations
+        </div>
+      </div>
+      <div class="film-info"><h2>City of God</h2></div>
+    </div>
+
+    <!--Pather Panchali -->
+    <div class="film-card">
+      <img src="pictures/satyajit roy/patherpachali.png">
+      <div class="poster-overlay">
+        <div class="year">1955</div>
+        <div class="awards">
+          Director: Satyajit Ray<br><br>
+          🏆 Best Human Document – Cannes Film Festival<br>
+          🏆 National Film Award – Best Feature Film<br>
+          🏆 International Recognition at Venice & London
+        </div>
+      </div>
+      <div class="film-info"><h2>Pather Panchali</h2></div>
+    </div>
+
+    <!--Lagaan -->
+    <div class="film-card">
+      <img src="pictures/films/lagaan.png">
+      <div class="poster-overlay">
+        <div class="year">2001</div>
+        <div class="awards">
+          Director: Ashutosh Gowariker<br><br>
+          🏆 Filmfare – Best Film<br>
+          🏆 National Film Award – Popular Film<br>
+          🏆 Academy Awards Nominee – Best Foreign Language Film
+        </div>
+      </div>
+      <div class="film-info"><h2>Lagaan</h2></div>
+    </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+    <div class="footer-inner">
+        <div>📧 shalinidhar466@gmail.com</div>
+        <div class="footer-center">© 2026 • Designed & coded by Shalini •</div>
+        <div class="footer-right">
+            <a href="https://github.com/shalini753">• GitHub</a> |
+            <a href="https://www.linkedin.com/in/shalini-dhar-9a1018312">LinkedIn •</a>
+        </div>
+    </div>
+    </footer>
+
+    </body>
+    </html>

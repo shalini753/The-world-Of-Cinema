@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cinema Through Time</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+* { box-sizing: border-box; }
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 60px; 
+    background: rgba(36, 24, 15, 0.85);
+    backdrop-filter: blur(4px);       
+    border-bottom: 2px solid #6b4f2d;
+    z-index: 1000;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.navbar:hover {
+    background: rgba(36, 24, 15, 0.95);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+.nav-container {
+   max-width: 1200px;
+    margin: auto;
+    padding: 5px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    font-size: 22px;
+    color: #c9a24d;
+    font-weight: bold;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: #f5e6c8;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: #c9a24d;
+}
+#menu-toggle {
+    display: none;
+}
+.menu-icon {
+    display: none;
+    font-size: 28px;
+    color: #c9a24d;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(36, 24, 15, 0.95);
+        backdrop-filter: blur(4px);
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        border-top: 2px solid #6b4f2d;
+    }
+    .nav-links li {
+        padding: 15px 0;
+    }
+    #menu-toggle:checked + .menu-icon + .nav-links {
+        display: flex;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    color: #f5e6c8;
+    background: #0f0a05;
+    overflow-x: hidden;
+}
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("images/grain.png");
+    opacity: 0.14;
+    pointer-events: none;
+    animation: grain 7s steps(10) infinite;
+    z-index: 9999;
+}
+
+@keyframes grain {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(-2%,2%); }
+    50% { transform: translate(2%,-2%); }
+    75% { transform: translate(-1%,1%); }
+    100% { transform: translate(0,0); }
+}
+
+.hero {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(15,10,5,0.6), rgba(15,10,5,0.9)),
+        url("pictures/gallery/g1.png") center/cover fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 56px;
+    color: #c9a24d;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 10px black;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 20px auto 0;
+    font-size: 18px;
+    opacity: 0.85;
+}
+
+.era {
+    position: relative;
+    min-height: 120vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 10%;
+}
+
+.era::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(15,10,5,0.4),
+        rgba(15,10,5,0.9)
+    );
+    z-index: 1;
+}
+
+.era-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: sepia(60%) contrast(1.05);
+    z-index: 0;
+}
+
+.era-content {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+}
+
+.era h2 {
+    font-size: 40px;
+    color: #c9a24d;
+    margin-bottom: 15px;
+}
+
+.era span {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #b8964d;
+}
+
+.era p {
+    margin-top: 20px;
+    line-height: 1.8;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.image-dump {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.image-dump img {
+    width: 160px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #6b4f2d;
+    filter: sepia(70%);
+    transition: transform 0.6s ease;
+}
+
+.image-dump img:hover {
+    transform: scale(1.08);
+}
+
+.silent .era-bg {
+    background-image: url("pictures/gallery/g2.png");
+}
+
+.golden .era-bg {
+    background-image: url("pictures/gallery/g3.png");
+}
+
+.newwave .era-bg {
+    background-image: url("pictures/gallery/g4.png");
+}
+
+.modern .era-bg {
+    background-image: url("pictures/gallery/g5.png");
+}
+
+.footer {
+    padding: 30px;
+    text-align: center;
+    background: #0f0a05;
+    border-top: 2px solid #6b4f2d;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 38px; }
+    .era { padding: 80px 7%; }
+    .image-dump { flex-wrap: wrap; }
+}
+</style>
+</head>
+
+<body>
+
+     <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fa-duotone fa-solid fa-clapperboard" style="--fa-primary-color: #765714; --fa-secondary-color: #765714;"></i>Film Noiré</div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">☰</label>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="directors.html">Directors</a></li>
+            <li><a href="films.html">Movies</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+    </nav>
+
+<section class="hero">
+    <div>
+        <h1>Cinema Through Time</h1>
+        <p>
+            A visual archive — how moving images learned to speak, feel,
+            dream, and remember.
+        </p>
+    </div>
+</section>
+
+<!-- SILENT ERA -->
+<section class="era silent">
+    <div class="era-bg"></div>
+    <div class="era-content">
+        <span>1895 – 1929</span>
+        <h2>The Silent Era</h2>
+        <p>
+            Cinema was born without sound — relying on faces, gestures,
+            shadows, and music halls. Emotion lived entirely inside the frame.
+        </p>
+
+        <div class="image-dump">
+            <img src="gallery/i1.png">
+            <img src="gallery/i2.png">
+            <img src="gallery/i3.png">
+        </div>
+    </div>
+</section>
+
+<!-- GOLDEN AGE -->
+<section class="era golden">
+    <div class="era-bg"></div>
+    <div class="era-content">
+        <span>1930 – 1959</span>
+        <h2>The Golden Age</h2>
+        <p>
+            Hollywood found its voice. Stars were born, genres formed,
+            and cinema became myth.
+        </p>
+
+        <div class="image-dump">
+            <img src="gallery/i4.png">
+            <img src="gallery/i5.png">
+            <img src="gallery/i6.png">
+        </div>
+    </div>
+</section>
+
+<!-- NEW WAVE -->
+<section class="era newwave">
+    <div class="era-bg"></div>
+    <div class="era-content">
+        <span>1960 – 1980</span>
+        <h2>New Wave & Art Cinema</h2>
+        <p>
+            Directors broke rules. Stories became personal, political,
+            philosophical — cinema learned to question itself.
+        </p>
+
+        <div class="image-dump">
+            <img src="gallery/i7.png">
+            <img src="gallery/i8.png">
+            <img src="gallery/i9.png">
+        </div>
+    </div>
+</section>
+
+<!-- MODERN -->
+<section class="era modern">
+    <div class="era-bg"></div>
+    <div class="era-content">
+        <span>1990 – Present</span>
+        <h2>Modern Cinema</h2>
+        <p>
+            Technology expanded imagination. Cinema became global,
+            emotional, and limitless.
+        </p>
+
+        <div class="image-dump">
+            <img src="gallery/i11.png">
+            <img src="gallery/i10.png">
+            <img src="gallery/i12.png">
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2026 • A visual archive by Shalini • Cinema never stops evolving
+</footer>
+
+</body>
+</html>

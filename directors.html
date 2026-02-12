@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Legendary Film Directors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.0/css/all.css">
+
+    <style>
+        body {
+            background-color: #1c140d;
+            background-image: url("images/film-bg.png");
+            font-family: Georgia, serif;
+            color: #f5e6c8;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100vw;
+            height: 60px;
+            background: rgba(36, 24, 15, 0.85);
+            backdrop-filter: blur(4px);       
+            border-bottom: 2px solid #6b4f2d;
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+        .navbar:hover {
+            background: rgba(36, 24, 15, 0.95);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 5px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 22px;
+            color: #c9a24d;
+            font-weight: bold;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #f5e6c8;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #c9a24d;
+        }
+
+        .main-title {
+            text-align: center;
+            font-size: 42px;
+            color: #c9a24d;
+            margin: 60px 0;
+            text-shadow: 2px 2px 6px black;
+        }
+
+        .director-list {
+            width: 85%;
+            margin: auto;
+        }
+
+        .director-item {
+            background-color: #2a1e16;
+            border: 2px solid #6b4f2d;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: all 0.6s ease;
+        }
+
+        .director-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .director-img {
+            width: 140px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid #c9a24d;
+        }
+
+        .director-info {
+            margin-left: 25px;
+        }
+
+        .director-info h2 {
+            color: #c9a24d;
+            margin-bottom: 8px;
+        }
+
+        .director-extra {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.7s ease, opacity 0.5s ease;
+             position: relative;
+            overflow: visible; 
+        }
+
+        .director-item:hover .director-extra {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* MOVIE CARD HOVER ZOOM */
+        .movies {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .movies img {
+            width: 140px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid #6b4f2d;
+            filter: sepia(70%);
+            transition: 
+                transform 0.4s ease,
+                filter 0.4s ease,
+                box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+        .movies img:hover {
+            transform: scale(1.25);
+            filter: grayscale(50%);
+            z-index: 5;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+        }
+
+
+        .achievements {
+            background-color: #24180f;
+            padding: 20px;
+            border-top: 2px dashed #6b4f2d;
+        }
+
+        .achievements h3 {
+            color: #c9a24d;
+        }
+        .socials a {
+            margin: 0 10px;
+            color: #c9a24d;
+            text-decoration: none;
+        }
+
+        .footer a {
+            color: #c9a24d;         
+            text-decoration: none;
+        }
+
+        .footer a:visited {
+            color: #c9a24d;          
+        }
+
+        .footer a:hover {
+            color: #f5e6c8;        
+        }
+
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            height: 5px;
+        }
+
+        .footer-left {
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .footer-center {
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        .footer-right {
+            text-align: right;
+        }
+        </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">Film Noiré<i class="fa-duotone fa-solid fa-clapperboard" style="--fa-primary-color: #765714; --fa-secondary-color: #765714;"></i>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="directors.html">Directors</a></li>
+            <li><a href="films.html">Movies</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<h1 class="main-title">Legendary Film Directors</h1>
+<div class="director-list">
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/alfred hitchcock/alfredhitchcock.png" class="director-img">
+            <div class="director-info">
+                <h2>Alfred Hitchcock</h2>
+                <p>The master of suspense who transformed psychological tension into cinematic art.</p>
+
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/alfred hitchcock/psycho.png">
+                <img src="pictures/alfred hitchcock/vertigo.png">
+                <img src="pictures/alfred hitchcock/rearwindow.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Known as the “Master of Suspense,” Hitchcock redefined psychological thrillers. His innovative camera techniques and narrative tension changed filmmaking forever. Despite limited Oscar wins, his influence dominates modern suspense and horror cinema.</p>
+                <p>Famous Works:</p>
+                <ul>
+                    <li>Psycho.</li>
+                    <li>Vertigo.</li>
+                    <li>Rear Window.</li>
+                </ul>            
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/satyajit roy/satyajit.png" class="director-img">
+            <div class="director-info">
+                <h2>Satyajit Ray</h2>
+                <p>Pioneer of humanist storytelling who brought Indian cinema to global recognition.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/satyajit roy/patherpachali.png">
+                <img src="pictures/satyajit roy/apursansar.png">
+                <img src="pictures/satyajit roy/gupibagha.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>A pioneer of Indian parallel cinema, Satyajit Ray brought human realism to global cinema. His storytelling emphasized simplicity, emotion, and social truth. He received the Honorary Academy Award for lifetime achievement and remains one of the most respected filmmakers worldwide.</p>
+                <p>Famous Works:</p>
+                <ul>
+                    <li>Pather Pachali.</li>
+                    <li>Charulata.</li>
+                    <li>Jalshaghar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Akira Kurosawa/akira.png" class="director-img">
+            <div class="director-info">
+                <h2>Akira Kurosawa</h2>
+                <p>Visionary filmmaker whose epic storytelling shaped both Eastern and Western cinema. </p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Akira Kurosawa/sevensamurai.png">
+                <img src="pictures/Akira Kurosawa/rashomon.png">
+                <img src="pictures/Akira Kurosawa/throneofblood.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Akira Kurosawa revolutionized world cinema with dynamic storytelling, visual composition, and moral depth. His films influenced Western directors like George Lucas and Sergio Leone. Kurosawa bridged Eastern philosophy with universal human themes, shaping modern cinematic language.</p>
+                <p>Famous Works:</p>
+                <ul>
+                    <li>Seven Samurai.</li>
+                    <li>Rashomon.</li>
+                    <li>Throne of Blood.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Stanley Kubrick/stanley.png" class="director-img">
+            <div class="director-info">
+                <h2>Stanley Kubrick</h2>
+                <p>Perfectionist auteur known for intellectually bold and visually striking films.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Stanley Kubrick/2001.png">
+                <img src="pictures/Stanley Kubrick//clockwork.png">
+                <img src="pictures/Stanley Kubrick/shinning.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Stanley Kubrick was a perfectionist filmmaker whose work spanned multiple genres. Known for visual symmetry, deep themes, and technical innovation, his films explored humanity, power, and psychology. His legacy continues to influence filmmakers across generations.</p>
+                <ul>
+                    <li>2001: A Space Odyssey.</li>
+                    <li>A Clockwork Orange.</li>
+                    <li>The Shinning.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Federico Fellini/federico.png" class="director-img">
+            <div class="director-info">
+                <h2>Federico Fellini</h2>
+                <p>Dreamlike storyteller who transformed personal memories and imagination into surreal cinematic poetry.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Federico Fellini/ladolce.png">
+                <img src="pictures/Federico Fellini/8.png">
+                <img src="pictures/Federico Fellini/amarcord.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Federico Fellini blended fantasy with reality, creating deeply personal and surreal cinema. His dreamlike storytelling and autobiographical themes redefined European art films. Fellini’s work explored memory, desire, and the human subconscious.</p>
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>La Dolce Vita.</li>
+                    <li>8<sup>1/2</sup></li>
+                    <li>Amarcord.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Ingmar Bergman/ingmar.png" class="director-img">
+            <div class="director-info">
+                <h2>Ingmar Bergman</h2>
+                <p>A profound psychological filmmaker who explored faith, mortality, love, and the human conscience with unmatched emotional intensity.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Ingmar Bergman/seventhseal.png">
+                <img src="pictures/Ingmar Bergman/persona.png">
+                <img src="pictures/Ingmar Bergman/wild.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Ingmar Bergman explored existentialism, faith, love, and death with intense emotional depth. His films are philosophical and psychologically complex. Bergman shaped art-house cinema and influenced filmmakers seeking introspective storytelling.</p>
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>The Seventh Seal.</li>
+                    <li>Persona.</li>
+                    <li>Wild Strawberries.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Wong Kar-wai/wong.png" class="director-img">
+            <div class="director-info">
+                <h2>Wong Kar-wai</h2>
+                <p>A master of mood and longing, celebrated for his poetic visuals, fragmented narratives, and deeply emotional portrayals of love and solitude.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Wong Kar-wai/inthemood.png">
+                <img src="pictures/Wong Kar-wai/chungking.png">
+                <img src="pictures/Wong Kar-wai/2046.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Wong Kar-wai is celebrated for visually poetic films about love, loneliness, and time. His unique use of color, music, and fragmented narratives created a signature style that deeply influenced contemporary cinema.</p>  
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>In the Mood for Love.</li>
+                    <li>Chungking Express.</li>
+                    <li>2046.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Hayao Miyazaki/hayo.png" class="director-img">
+            <div class="director-info">
+                <h2>Hayao Miyazaki</h2>
+                <p>Poet of animation who blends fantasy, nature, and human emotion seamlessly.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Hayao Miyazaki/spirited.png">
+                <img src="pictures/Hayao Miyazaki/totoro.png">
+                <img src="pictures/Hayao Miyazaki/mononoke.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Hayao Miyazaki is a legendary animator and co-founder of Studio Ghibli. His films blend fantasy with deep human emotion, environmental themes, and childhood wonder. Miyazaki elevated animation to serious cinematic art and inspired generations with hand-drawn storytelling and imaginative worlds.</p>
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>Spirited Away.</li>
+                    <li>My Neighbor Totoro.</li>
+                    <li>Princess Mononoke.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Martin Scorsese/martin.png" class="director-img">
+            <div class="director-info">
+                <h2>Martin Scorsese</h2>
+                <p>Chronicler of crime, faith, and flawed masculinity in American cinema.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Martin Scorsese/taxi.png">
+                <img src="pictures/Martin Scorsese/goodfellas.png">
+                <img src="pictures/Martin Scorsese/wolf.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+               <p>Martin Scorsese is known for gritty realism and powerful character studies. His films examine crime, morality, and obsession with unmatched intensity. A major force in modern cinema, he also preserves film history through restoration efforts.</p>
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>Taxi Driver.</li>
+                    <li>Good Fellas.</li>
+                    <li>The Wolf of Wall Street.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Andrei Tarkovsky/andrei.png" class="director-img">
+            <div class="director-info">
+                <h2>Andrei Tarkovsky</h2>
+                <p>A visionary filmmaker known for his slow, meditative cinema that explores memory, time, faith, and the spiritual depth of human existence.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Andrei Tarkovsky/stalker.png">
+                <img src="pictures/Andrei Tarkovsky/solaris.png">
+                <img src="pictures/Andrei Tarkovsky/mirror.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Andrei Tarkovsky created poetic, spiritual cinema emphasizing time, memory, and existence. His slow-paced visual style challenged conventional storytelling and elevated cinema into philosophical art. His films remain deeply influential in experimental filmmaking.</p>
+                 <p>Famous Works:</p>
+                 <ul>
+                    <li>Stalker.</li>
+                    <li>Solaris.</li>
+                    <li>Mirror.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="director-item">
+        <div class="director-top">
+            <img src="pictures/Steven Spielberg/steven.png" class="director-img">
+            <div class="director-info">
+                <h2>Steven Spielberg</h2>
+                <p>A master storyteller who blended blockbuster spectacle with emotional depth, redefining popular cinema while creating some of the most influential films in Hollywood history.</p>
+            </div>
+        </div>
+
+        <div class="director-extra">
+            <div class="movies">
+                <img src="pictures/Steven Spielberg/jurassic.png">
+                <img src="pictures/Steven Spielberg/list.png">
+                <img src="pictures/Steven Spielberg/et.png">
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <p>Steven Spielberg shaped modern blockbuster cinema while mastering emotional storytelling. His films balance entertainment with humanity, historical reflection, and wonder. One of the most commercially successful directors, Spielberg defined generations of film culture.</p>
+                <p>Famous Works:</p>
+                 <ul>
+                    <li>Jurassic Park.</li>
+                    <li>Schindler's List.</li>
+                    <li>E.T.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            📧 shalinidhar466@gmail.com
+        </div>
+        <div class="footer-center">
+            © 2026  <br> • Designed & coded by Shalini with a love for cinema •
+        </div>
+        <div class="footer-right socials">
+            <a href="https://github.com/shalini753">GitHub</a>
+            <a href="https://www.linkedin.com/in/shalini-dhar-9a1018312">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

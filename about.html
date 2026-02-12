@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.0/css/all.css">
+
+    <style>
+        /* GLOBAL RESET */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* BODY */
+    body {
+        background-color: #1c140d;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: 'Playfair Display', Georgia, serif;
+        color: #f5e6c8;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background: rgba(36, 24, 15, 0.95);
+        border-bottom: 2px solid #6b4f2d;
+        z-index: 1000;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 14px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        color: #c9a24d;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #f5e6c8;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #c9a24d;
+    }
+
+    /* ABOUT HERO */
+    .about-hero {
+        position: relative;
+        min-height: 85vh;
+        background:
+            linear-gradient(
+                rgba(25, 15, 8, 0.88),
+                rgba(10, 6, 3, 0.96)
+            ),
+            url("pictures/landingpagepics/cinema.png");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    /* FILM GRAIN */
+    .film-grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("images/grain.png");
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 1;
+        animation: grainMove 7s steps(10) infinite;
+    }
+
+    @keyframes grainMove {
+        0% { transform: translate(0,0); }
+        50% { transform: translate(-12px,12px); }
+        100% { transform: translate(0,0); }
+    }
+
+    /* HERO CONTENT */
+    .about-content {
+        max-width: 900px;
+        padding: 40px 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .about-content h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.4rem;
+        letter-spacing: 4px;
+        color: #c9a24d;
+    }
+
+    .divider {
+        width: 120px;
+        height: 2px;
+        background: #c9a24d;
+        margin: 25px auto;
+    }
+
+    .about-content .lead {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        opacity: 0.9;
+    }
+
+    /* ABOUT TEXT */
+    .about-text {
+        padding: 80px 20px;
+        max-width: 1000px;
+        margin: auto;
+        font-size: 1.05rem;
+        line-height: 2;
+    }
+
+    .about-text p {
+        margin-bottom: 30px;
+    }
+
+    /* CINEMA VALUES */
+    .cinema-values {
+        background: #1a1208;
+        padding: 80px 20px;
+        border-top: 3px double #6b4f2d;
+        border-bottom: 3px double #6b4f2d;
+    }
+
+    .cinema-values h2 {
+        text-align: center;
+        font-family: 'Cinzel', serif;
+        color: #c9a24d;
+        letter-spacing: 3px;
+        margin-bottom: 50px;
+    }
+
+    .values-grid {
+        max-width: 1000px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+    }
+
+    .value-card {
+        background: rgba(255, 215, 160, 0.05);
+        border: 1px solid #6b4f2d;
+        padding: 25px;
+        text-align: center;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .value-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 25px rgba(201, 162, 77, 0.35);
+    }
+
+    .value-card h3 {
+        color: #c9a24d;
+        font-family: 'Cinzel', serif;
+        margin-bottom: 10px;
+    }
+
+    /* CLOSING */
+    .about-closing {
+        padding: 80px 20px;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .about-closing h4 {
+        margin-top: 20px;
+        color: #c9a24d;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 2px;
+    }
+
+    /* FOOTER */
+    .footer {
+        background: #120c07;
+        border-top: 2px solid #6b4f2d;
+    }
+
+    .footer-inner {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        font-size: 14px;
+    }
+
+    .footer-center {
+        text-align: center;
+        opacity: 0.8;
+    }
+
+    .footer-right {
+        text-align: right;
+    }
+
+    .footer a {
+        color: #c9a24d;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: #f5e6c8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .about-content h1 {
+            font-size: 2.4rem;
+        }
+
+        .about-text {
+            padding: 50px 15px;
+        }
+
+        .footer-inner {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .footer-right {
+            text-align: center;
+        }
+    }
+
+        </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+        <div class="logo"> Film Noiré  <i class="fa-duotone fa-solid fa-clapperboard" style="--fa-primary-color: #765714; --fa-secondary-color: #765714;"></i></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="directors.html">Directors</a></li>
+            <li><a href="films.html">Movies</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="film-grain"></div>
+
+        <div class="about-content">
+            <h1>About Film Noiré</h1>
+            <div class="divider"></div>
+
+            <p class="lead">
+                Cinema is not just entertainment.  
+                It is memory, silence, conflict, love, and time — captured one frame at a time.
+            </p>
+        </div>
+    </section>
+
+    <section class="about-text container">
+        <p>
+            <strong>Film Noiré</strong> is a curated cinematic archive created for those who see films as art rather than content.
+            This project explores how cinema has evolved across eras, cultures, and philosophies — and how it continues to shape
+            the way we see the world.
+        </p>
+
+        <p>
+            From the raw expressions of silent cinema to the emotional complexity of modern storytelling, Film Noiré documents the
+            journey of filmmaking through iconic visuals, legendary directors, and landmark works that redefined cinema.
+        </p>
+
+        <p>
+            This platform is not about trends, box-office numbers, or algorithms.  
+            It is about <em>frames that linger</em>, <em>stories that haunt</em>, and cinema that stays with you long after the
+            screen fades to black.
+        </p>
+    </section>
+
+    <section class="cinema-values">
+        <div class="container">
+            <h2>The Philosophy</h2>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Visual Poetry</h3>
+                    <p>Frames that speak louder than dialogue.</p>
+                </div>
+
+                <div class="value-card">
+                    <h3>Timeless Stories</h3>
+                    <p>Narratives that survive generations.</p>
+                </div>
+
+                <div class="value-card">
+                    <h3>Directorial Vision</h3>
+                    <p>Artists who shaped cinema’s language.</p>
+                </div>
+
+                <div class="value-card">
+                    <h3>Evolution of Film</h3>
+                    <p>From monochrome reels to modern realism.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-closing">
+        <p>
+            If you believe cinema is more than just something you watch,  
+            then you are already a part of this world.
+        </p>
+
+        <h4>Welcome to Film Noiré.</h4>
+    </section>
+</body>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            📧 shalinidhar466@gmail.com
+        </div>
+        <div class="footer-center">
+            © 2026  <br> • Designed & coded by Shalini with a love for cinema •
+        </div>
+        <div class="footer-right socials">
+            <a href="https://github.com/shalini753">GitHub</a>
+            <a href="https://www.linkedin.com/in/shalini-dhar-9a1018312">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+</html>
